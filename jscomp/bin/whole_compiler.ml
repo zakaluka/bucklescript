@@ -96711,6 +96711,10 @@ and
 
 
     | Lsequence (l1,l2) ->
+      let () = 
+        Ext_log.dwarn __LOC__ "l1: %a@.l2: %a@."
+        Ext_pervasives.pp_any l1
+        Ext_pervasives.pp_any l2 in 
       let output_l1 = 
         compile_lambda {cxt with st = EffectCall; should_return =  ReturnFalse} l1 in
       let output_l2 = 
@@ -96719,7 +96723,9 @@ and
 
 
     | Lifthenelse(p,t_br,f_br) ->
-
+      let () = 
+        Ext_log.dwarn __LOC__ "p:%a@."
+        Ext_pervasives.pp_any p in 
       (*
          This should be optimized in lambda layer 
          (let (match/1038 = (apply g/1027 x/1028))
